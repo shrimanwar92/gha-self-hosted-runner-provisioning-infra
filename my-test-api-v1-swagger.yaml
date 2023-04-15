@@ -1,0 +1,140 @@
+---
+swagger: "2.0"
+info:
+  version: "2023-04-14T16:31:47Z"
+  title: "my-test-api"
+host: "tce5rsec11.execute-api.us-east-1.amazonaws.com"
+basePath: "/v1"
+schemes:
+- "https"
+paths:
+  /get-runner-registration-token:
+    post:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Accept"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "X-GitHub-Api-Version"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /get-runners:
+    get:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Accept"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "X-GitHub-Api-Version"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /get-runners/{runnerId}:
+    delete:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Accept"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "runnerId"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "X-GitHub-Api-Version"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "runnerId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
