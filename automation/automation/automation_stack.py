@@ -5,7 +5,7 @@ from aws_cdk import (
 from constructs import Construct
 import ast
 
-class AutomationStack(Stack):
+class TargetAccountAutomationStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, config, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
@@ -34,7 +34,7 @@ class AutomationStack(Stack):
             role_name = config['TARGET_ACCOUNT']['RoleName'],
             assumed_by = iam.CompositePrincipal(
                 iam.ServicePrincipal("lambda.amazonaws.com"),
-                iam.AnyPrincipal() #important to set trust relationship, so that this can be assumed by toolchain account
+                iam.AccountPrincipal(config['TOOLCHAIN_ACCOUNT']['ToolchainAccountNumber']) #important to set trust relationship, so that this can be assumed by toolchain account
             )
         )
 
@@ -50,14 +50,13 @@ class AutomationStack(Stack):
 
 
 
-class RoleUpdateAutomationStackInToolchain(Stack):
+class ToolchainAccountUpdateStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, config, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         import_role = iam.Role.from_role_name(self, 'import-and-update-role',
-            role_name = config['TOOLCHAIN_ACCOUNT']['ToolchainAccountLambdaRoleName']                
+            role_name = config['TOOLCHAIN_ACCOUNT']['ToolchainAccountUpdateLambdaRole']                
         )
-
         import_role.add_to_principal_policy(
             iam.PolicyStatement(
                 effect=iam.Effect.ALLOW,
@@ -68,3 +67,4 @@ class RoleUpdateAutomationStackInToolchain(Stack):
                 actions=["sts:AssumeRole"]
             )
         )
+
