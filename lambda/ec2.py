@@ -8,6 +8,7 @@ from typing import TypedDict
 class InstanceOptions(TypedDict):
     org: str
     token: str
+    ami_id: str
     instance_type: str
     subnet_id: str
     security_group_id: str
@@ -48,7 +49,7 @@ class EC2Utils():
         
         try:
             response = self.client.run_instances(
-                ImageId="ami-0ee7455b4a7147df4",
+                ImageId=opts['ami_id'],
                 InstanceType=opts['instance_type'],
                 MinCount=1,
                 MaxCount=1,

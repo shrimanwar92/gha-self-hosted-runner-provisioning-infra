@@ -12,6 +12,7 @@ def lambda_handler(event, context):
     role_arn = f"arn:aws:iam::{event['account_number']}:role/github-actions-lambda-ec2-role" # needs to be parameterized
     assumed_role = sts.assume_role(RoleArn=role_arn, RoleSessionName='session1')
     credentials = assumed_role['Credentials']
+    #ami-0ee7455b4a7147df4
     
     org = event['org']
     pat = get_pat_token_from_ssm()
@@ -24,9 +25,10 @@ def lambda_handler(event, context):
         instance_data = ec2.start_instance(
             org=org,
             token=token,
+            ami_id="ami-0ee7455b4a7147df4",
             instance_type="t3.micro",
-            subnet_id="subnet-04f62a30f30bcdba8",
-            security_group_id="sg-017b884d399cfcbac",
+            subnet_id=event['subnet_id'],
+            security_group_id=event['security_group_id'],
             role_name="git-actions-self-hosted-ec2-instance-role"
         )
         return instance_data

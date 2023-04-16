@@ -41,3 +41,16 @@
 #  sudo yum install git -y && \
 #  sudo yum install libicu -y && \
 #  sudo systemctl enable docker
+
+# need this in nilays account so that nilay's account can assume archanas account role
+
+# {
+#     "Action": "sts:AssumeRole",
+#     "Resource": [
+#         "arn:aws:iam::535190322927:role/github-actions-lambda-ec2-role",
+#         "arn:aws:iam::535190322927:role/github-actions-lambda-ec2-role/*"
+#     ],
+#     "Effect": "Allow"
+# }
+
+# in archanas account i need to set proper trust relationship
