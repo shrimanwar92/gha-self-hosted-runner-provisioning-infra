@@ -59,6 +59,3 @@ class GithubActions():
                 print(error)
             else:
                 print(f"Runner with label - {label} deleted successfully")
-
-gh = GithubActions("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")
-print(gh.get_registration_token())
