@@ -5,7 +5,7 @@ import random
 from ec2 import EC2Utils
 from github import GithubActions
 
-org = "taviscasolutions-poc"
+org = "my-org"
 
 def get_pat_token_from_ssm(repo_name):
     client = boto3.client("ssm", region_name = "us-east-1")
